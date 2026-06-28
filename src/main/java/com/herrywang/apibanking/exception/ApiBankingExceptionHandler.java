@@ -14,5 +14,11 @@ public class ApiBankingExceptionHandler {
 		return ResponseEntity.badRequest().body(ex.getErrors());
 	}
 
+	// Default exception handler
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<String> handleDefaultException(final Exception ex) {
+		return ResponseEntity.internalServerError().body("System is currently unavailable");
+	}
+
 
 }
