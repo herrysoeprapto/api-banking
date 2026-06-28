@@ -3,5 +3,6 @@ CREATE TABLE account (
     customer_id SERIAL NOT NULL,
     account_number VARCHAR(16) NOT NULL,
     account_nickname VARCHAR(30),
+    version INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (customer_id) REFERENCES customer(id)
 );

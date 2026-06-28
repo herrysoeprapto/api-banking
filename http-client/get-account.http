@@ -1,12 +1,7 @@
-### POST create account
+### GET get accounts list
 // @no-log
-POST http://localhost:8080/api/account/createAccount
-Content-Type: application/json
-
-{
-  "customerName": "Herry",
-  "accountNickname": "Savings Account"
-}
+@customerName=Herry
+GET http://localhost:8080/api/customer/{{customerName}}/getAccounts
 
 > {%
     client.log("Response: ", response);

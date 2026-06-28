@@ -40,6 +40,7 @@ public class AccountValidator {
 			errorMsg.add("customerName is mandatory");
 		}
 
+		// skip next validations if there is already errorMsg
 		if (!errorMsg.isEmpty()) {
 			throw new ValidationException(errorMsg);
 		}
@@ -48,7 +49,7 @@ public class AccountValidator {
 		if (optionalCustomerEntity.isPresent()) {
 			final CustomerEntity customerEntity = optionalCustomerEntity.get();
 			// check that customer does not have max of 5 accounts yet
-			if (accountRepository.countAccountEntitiesByCustomerId(customerEntity.getId()) >= 5) {
+			if (accountRepository.countAccountEntitiesByCustomerId(customerEntity) >= 5) {
 				errorMsg.add("Customer already has max 5 accounts");
 			}
 		}
