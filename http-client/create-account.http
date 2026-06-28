@@ -1,0 +1,17 @@
+### POST create account
+// @no-log
+POST http://localhost:8080/api/createAccount
+Content-Type: application/json
+
+{
+  "customerName": "Herry",
+  "accountNickname": "112233"
+}
+
+> {%
+    client.log("Response: ", response);
+    client.test("Response is 200 OK", function() {
+        client.assert(response.status === 200, "Expected response status is 200 OK, but received " + response.status);
+    })
+%}
+###
