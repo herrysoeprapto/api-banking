@@ -11,7 +11,7 @@ public class ApiBankingExceptionHandler {
 
 	@ExceptionHandler(ValidationException.class)
 	public ResponseEntity<List<String>> handleValidationException(final ValidationException ex) {
-		return ResponseEntity.badRequest().body(ex.getErrorMsg());
+		return ResponseEntity.badRequest().body(ex.getErrors());
 	}
 
 
