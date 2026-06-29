@@ -4,6 +4,8 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.herrywang.apibanking.exception.ValidationException;
@@ -28,6 +30,7 @@ public class AccountService {
 	private final AccountValidator accountValidator;
 	private final AccountMapper accountMapper;
 
+	@CacheEvict(cacheManager = "cacheManager", value = "accountsCache", key = "#p0.customerName")
 	public Account createAccount(final Account account) {
 		accountValidator.validate(account);
 
@@ -42,6 +45,7 @@ public class AccountService {
 	}
 
 
+	@Cacheable(cacheManager = "cacheManager", value = "accountsCache")
 	public List<Account> getAccounts(final String customerName) {
 		final Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findByCustomerName(customerName);
 		if (optionalCustomerEntity.isEmpty()) {
